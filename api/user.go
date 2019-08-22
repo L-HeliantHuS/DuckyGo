@@ -51,6 +51,18 @@ func UserMe(c *gin.Context) {
 	c.JSON(200, res)
 }
 
+// ChangePassword 修改密码
+func ChangePassword(c *gin.Context) {
+	user := CurrentUser(c)
+	var service service.ChangePassword
+	if err := c.ShouldBind(&service); err == nil {
+		    res := service.Change(user)
+			c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}
+
 // UserLogout 用户登出
 func UserLogout(c *gin.Context) {
 	s := sessions.Default(c)
