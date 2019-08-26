@@ -1,9 +1,9 @@
 package server
 
 import (
+	"os"
 	"singo/api"
 	"singo/middleware"
-	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,7 +22,7 @@ func NewRouter() *gin.Engine {
 	{
 		v1.POST("ping", api.Ping)
 
-		// 用户登录
+		// 用户注册
 		v1.POST("user/register", api.UserRegister)
 
 		// 用户登录
@@ -36,6 +36,13 @@ func NewRouter() *gin.Engine {
 			auth.GET("user/me", api.UserMe)
 			auth.DELETE("user/logout", api.UserLogout)
 			auth.PUT("user/changepassword", api.ChangePassword)
+
+			// 需要是管理员
+			admin := auth.Group("")
+			admin.Use(middleware.AuthAdmin())
+			{
+
+			}
 		}
 
 	}
