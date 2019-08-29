@@ -15,11 +15,13 @@ func NewRouter() *gin.Engine {
 	r.StaticFile("/favicon.ico", "static/favicon.ico")
 
 	// 中间件, 顺序不能改
-	r.Use(middleware.SaveLog())
+	// 这条是为了防止因为记录日志而导致性能损失
+	if os.Getenv("DEBUG") == "DEBUG" {
+		r.Use(middleware.SaveLog())
+	}
 	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
 	r.Use(middleware.CurrentUser())
-
 
 	// 路由
 	v1 := r.Group("/api/v1")
