@@ -2,8 +2,6 @@
 
 Singo: Simple Single Golang Web Service
 
-go-crud正式改名为Singo! :sparkles:
-
 使用Singo开发Web服务: 用最简单的架构，实现够用的框架，服务海量用户
 
 ForK来自: https://github.com/bydmm/singo
@@ -44,6 +42,23 @@ ForK来自: https://github.com/bydmm/singo
 6. auth权限控制文件夹
 7. util一些通用的小工具
 8. conf放一些静态存放的配置文件，其中locales内放置翻译相关的配置文件
+
+## LOG_LEVEL说明
+```text
+
+当设置LOG_LEVEL设置为ERROR
+就只会显示 error panic
+
+当设置LOG_LEVEL设置为WARNING
+就只会显示 warning error panic
+
+当设置LOG_LEVEL设置为INFO
+就只会显示 info warning error panic
+
+当设置LOG_LEVEL设置为DEBUG
+则全部显示
+
+```
 
 ## Godotenv
 

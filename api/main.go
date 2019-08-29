@@ -3,12 +3,12 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"gopkg.in/go-playground/validator.v8"
 	"singo/conf"
 	"singo/model"
 	"singo/serializer"
-
-	"github.com/gin-gonic/gin"
-	validator "gopkg.in/go-playground/validator.v8"
+	"singo/util"
 )
 
 // Ping 状态检查页面
@@ -30,6 +30,7 @@ func CurrentUser(c *gin.Context) *model.User {
 
 // ErrorResponse 返回错误消息
 func ErrorResponse(err error) serializer.Response {
+	util.Log().Error(fmt.Sprint(err))  // 记录错误Log
 	if ve, ok := err.(validator.ValidationErrors); ok {
 		for _, e := range ve {
 			field := conf.T(fmt.Sprintf("Field.%s", e.Field))

@@ -12,15 +12,19 @@ import (
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 
+	r.StaticFile("/favicon.ico", "static/favicon.ico")
+
 	// 中间件, 顺序不能改
+	r.Use(middleware.SaveLog())
 	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
 	r.Use(middleware.CurrentUser())
 
+
 	// 路由
 	v1 := r.Group("/api/v1")
 	{
-		v1.POST("ping", api.Ping)
+		v1.GET("ping", api.Ping)
 
 		// 用户注册
 		v1.POST("user/register", api.UserRegister)

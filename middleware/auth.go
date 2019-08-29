@@ -2,11 +2,10 @@ package middleware
 
 import (
 	"fmt"
-	"singo/model"
-	"singo/serializer"
-
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"singo/model"
+	"singo/serializer"
 )
 
 // CurrentUser 获取登录用户

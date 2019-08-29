@@ -4,6 +4,7 @@ import (
 	"singo/cache"
 	"singo/model"
 	"os"
+	"singo/util"
 
 	"github.com/joho/godotenv"
 )
@@ -12,6 +13,8 @@ import (
 func Init() {
 	// 从本地读取环境变量
 	godotenv.Load()
+
+	util.BuildLogger(os.Getenv("LOG_LEVEL"))
 
 	// 读取翻译文件
 	if err := LoadLocales("conf/locales/zh-cn.yaml"); err != nil {
