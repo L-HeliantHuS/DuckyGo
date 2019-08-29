@@ -37,7 +37,7 @@ func (ll *Logger) saveLog(log string) error {
 	if err != nil {
 		panic(err)
 	}
-	n, _ := file.Seek(0, os.SEEK_END)
+	n, _ := file.Seek(0, 2)
 	_, err = file.WriteAt([]byte(log), n)
 	return err
 }
@@ -47,7 +47,6 @@ func (ll *Logger) Println(msg string) {
 	s := fmt.Sprintf("%s %s \n", time.Now().Format("2006-01-02 15:04:05 -0700"), msg)
 	_ = ll.saveLog(s)
 	fmt.Println(s)
-
 }
 
 // Panic 极端错误
@@ -55,7 +54,7 @@ func (ll *Logger) Panic(format string) {
 	if LevelError > ll.level {
 		return
 	}
-	msg := fmt.Sprintf("[Panic] "+format)
+	msg := fmt.Sprintf("[Panic] " + format)
 	ll.Println(msg)
 	os.Exit(0)
 }
@@ -65,7 +64,7 @@ func (ll *Logger) Error(format string) {
 	if LevelError > ll.level {
 		return
 	}
-	msg := fmt.Sprintf("[E] "+format)
+	msg := fmt.Sprintf("[E] " + format)
 	ll.Println(msg)
 }
 
@@ -74,7 +73,7 @@ func (ll *Logger) Warning(format string) {
 	if LevelWarning > ll.level {
 		return
 	}
-	msg := fmt.Sprintf("[W] "+format)
+	msg := fmt.Sprintf("[W] " + format)
 	ll.Println(msg)
 }
 
@@ -83,7 +82,7 @@ func (ll *Logger) Info(format string) {
 	if LevelInformational > ll.level {
 		return
 	}
-	msg := fmt.Sprintf("[I] "+format)
+	msg := fmt.Sprintf("[I] " + format)
 	ll.Println(msg)
 }
 
@@ -92,7 +91,7 @@ func (ll *Logger) Debug(format string) {
 	if LevelDebug > ll.level {
 		return
 	}
-	msg := fmt.Sprintf("[D] "+format)
+	msg := fmt.Sprintf("[D] " + format)
 	ll.Println(msg)
 }
 
