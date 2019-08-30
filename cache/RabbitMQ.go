@@ -7,9 +7,11 @@ import (
 	"singo/util"
 )
 
+// 创建RabbitMQ连接单例
 var Channel *amqp.Channel
 
-func Init(amqpUrl string) {
+// RabbitMQ 在中间件中初始化RabbitMQ连接
+func RabbitMQ(amqpUrl string) {
 	connection, err := amqp.Dial(amqpUrl)
 	if err != nil {
 		log.Fatal(err)
@@ -19,5 +21,6 @@ func Init(amqpUrl string) {
 	if err != nil {
 		util.Log().Panic(fmt.Sprint(err))
 	}
+
 	Channel = channel
 }
