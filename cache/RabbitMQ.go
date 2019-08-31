@@ -11,7 +11,7 @@ import (
 var Channel *amqp.Channel
 
 // RabbitMQ 在中间件中初始化RabbitMQ连接
-func RabbitMQ(amqpUrl string) {
+func InitRabbitMQ(amqpUrl string) {
 	connection, err := amqp.Dial(amqpUrl)
 	if err != nil {
 		log.Fatal(err)
