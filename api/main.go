@@ -14,7 +14,7 @@ import (
 // Ping 状态检查页面
 func Ping(c *gin.Context) {
 	c.JSON(200, serializer.Response{
-		Msg:    "Pong",
+		Msg: "Pong",
 	})
 }
 
@@ -30,7 +30,7 @@ func CurrentUser(c *gin.Context) *model.User {
 
 // ErrorResponse 返回错误消息
 func ErrorResponse(err error) serializer.Response {
-	util.Log().Error(fmt.Sprint(err))  // 记录错误Log
+	util.Log().Error(fmt.Sprint(err)) // 记录错误Log
 	if ve, ok := err.(validator.ValidationErrors); ok {
 		for _, e := range ve {
 			field := conf.T(fmt.Sprintf("Field.%s", e.Field))
