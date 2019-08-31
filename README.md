@@ -1,12 +1,10 @@
 # Singo-WebFrameWork  (基于gin+gorm搭建的快速高效稳定的web restful api)
 
-Singo: Simple Single Golang Web Service
+Singo: Simple Single Golang Web Service :sparkles:
 
-使用Singo开发Web服务: 用最简单的架构，实现够用的框架，服务海量用户
+项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest :fire:
 
-项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest
-
-## 目的
+## 目的 :star2:
 
 本项目采用了一系列Golang中比较流行的组件，可以以本项目为基础快速搭建Restful Web API
 
@@ -22,6 +20,7 @@ Singo: Simple Single Golang Web Service
 6. [Gin-Cors](https://github.com/gin-contrib/cors): Gin框架提供的跨域中间件
 7. 橙卡大佬实现了国际化i18n的一些基本功能
 8. 本项目是使用基于cookie-redis实现的session来保存登录状态.
+9. 使用Redis-list实现了内部消息队列,发送邮件可实现完全异步发送.
 
 本项目已经预先实现了一些常用的代码方便参考和复用:
 
