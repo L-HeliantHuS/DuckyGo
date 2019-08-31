@@ -44,6 +44,9 @@ Singo: Simple Single Golang Web Service :sparkles:
 9. log放生成的日志文件，第一次使用需要双击运行一下bat文件生成log文件.
 
 ## LOG_LEVEL说明 :purple_heart:
+
+第一次使用要先运行`log`文件夹下的`bat`批处理，用来生成记录log所需要的log文件.
+
 ```text
 
 当设置LOG_LEVEL设置为ERROR
