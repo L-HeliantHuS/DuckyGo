@@ -1,10 +1,10 @@
-# Singo
+# Singo-WebFrameWork  (基于gin+gorm搭建的快速高效稳定的web restful api)
 
 Singo: Simple Single Golang Web Service
 
 使用Singo开发Web服务: 用最简单的架构，实现够用的框架，服务海量用户
 
-ForK来自: https://github.com/bydmm/singo
+项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest
 
 ## 目的
 
@@ -20,8 +20,8 @@ ForK来自: https://github.com/bydmm/singo
 4. [Go-Redis](https://github.com/go-redis/redis): Golang Redis客户端
 5. [godotenv](https://github.com/joho/godotenv): 开发环境下的环境变量工具，方便使用环境变量
 6. [Gin-Cors](https://github.com/gin-contrib/cors): Gin框架提供的跨域中间件
-7. 自行实现了国际化i18n的一些基本功能
-8. 本项目是使用基于cookie实现的session来保存登录状态的，如果需要可以自行修改为token验证
+7. 橙卡大佬实现了国际化i18n的一些基本功能
+8. 本项目是使用基于cookie-redis实现的session来保存登录状态.
 
 本项目已经预先实现了一些常用的代码方便参考和复用:
 
@@ -38,10 +38,11 @@ ForK来自: https://github.com/bydmm/singo
 2. model文件夹负责存储数据库模型和数据库操作相关的代码
 3. service负责处理比较复杂的业务，把业务代码模型化可以有效提高业务代码的质量（比如用户注册，充值，下单等）
 4. serializer储存通用的json模型，把model得到的数据库模型转换成api需要的json对象
-5. cache负责redis缓存相关的代码
+5. cache负责redis, RabbitMQ缓存相关的代码
 6. auth权限控制文件夹
-7. util一些通用的小工具
+7. util一些小工具, 目前有randomString、Logger、SendEmail
 8. conf放一些静态存放的配置文件，其中locales内放置翻译相关的配置文件
+9. log放生成的日志文件，第一次使用需要双击运行一下bat文件生成log文件.
 
 ## LOG_LEVEL说明
 ```text
@@ -66,6 +67,7 @@ ForK来自: https://github.com/bydmm/singo
 
 ```shell
 MYSQL_DSN="db_user:db_passwd@tcp(127.0.0.1:3306)/db_name?charset=utf8&parseTime=True&loc=Local" # Mysql连接配置
+RABBITMQ_DSN="amqp://mq_user:mq_passwd@localhost:5672/virtual_host"                             # RabbitMQ连接配置
 REDIS_ADDR="127.0.0.1:6379" # Redis端口和地址
 REDIS_PW=""                 # Redis连接密码
 REDIS_DB=""                 # Redis库从0到10，不填即为0
@@ -77,7 +79,7 @@ LOG_LEVEL="ERROR"           # 设置为ERROR基本不会记录log 设置为DEBUG
 Windows安装MySQL和Redis麻烦?:no_mouth: 你可以使用[Docker](https://hub.docker.com/)啊！:sunglasses:
 
 - 快速起Redis: `docker run -di --name redis -p 6379:6379 redis` 
-- 快速起MySQL: `docker run -di --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql` 
+- 快速起MySQL: `docker run -di --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=yourpassword mysql` 
 
 因为启动容器指定了--name, 后续可以使用`docker start|stop redis|mysql` 来进行开启或者关闭.
 
@@ -85,9 +87,9 @@ Windows安装MySQL和Redis麻烦?:no_mouth: 你可以使用[Docker](https://hub.
 ```shell
 docker exec -it mysql /bin/bash    # 打开mysql bash交互
 mysql -u root -p                   # 进入mysql交互
-ALTER USER 'root'@'%' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;      # 更改加密方式
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';   # 更改密码
-FLUSH PRIVILEGES;                                                          # 刷新
+ALTER USER 'root'@'%' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;            # 更改加密方式
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';   # 更改密码
+FLUSH PRIVILEGES;                                                                # 刷新
 ```
     
 ## Go Mod
@@ -106,7 +108,7 @@ go run main.go // 自动安装
 go run main.go
 ```
 
-项目运行后启动在3000端口（可以修改，参考gin文档)   
+项目运行后启动在8000端口（可以修改，参考gin文档)   
 本项目修改端口请查看`main.go`
 
 
