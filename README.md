@@ -8,7 +8,7 @@ Singo: Simple Single Golang Web Service :sparkles:
 
 本项目采用了一系列Golang中比较流行的组件，可以以本项目为基础快速搭建Restful Web API
 
-## 特色
+## 特色 :blue_heart:
 
 本项目已经整合了许多开发API所必要的组件：
 
@@ -43,7 +43,7 @@ Singo: Simple Single Golang Web Service :sparkles:
 8. conf放一些静态存放的配置文件，其中locales内放置翻译相关的配置文件
 9. log放生成的日志文件，第一次使用需要双击运行一下bat文件生成log文件.
 
-## LOG_LEVEL说明
+## LOG_LEVEL说明 :purple_heart:
 ```text
 
 当设置LOG_LEVEL设置为ERROR
@@ -60,7 +60,7 @@ Singo: Simple Single Golang Web Service :sparkles:
 
 ```
 
-## Godotenv
+## Godotenv :yello_heart:
 
 项目在启动的时候依赖以下环境变量，但是在也可以在项目根目录创建.env文件设置环境变量便于使用(建议开发环境使用)
 
@@ -91,7 +91,7 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';  
 FLUSH PRIVILEGES;                                                                # 刷新
 ```
     
-## Go Mod
+## Go Mod :green_heart:
 
 本项目使用[Go Mod](https://github.com/golang/go/wiki/Modules)管理依赖。
 
@@ -101,7 +101,7 @@ export GOPROXY=http://mirrors.aliyun.com/goproxy/
 go run main.go // 自动安装
 ```
 
-## 运行
+## 运行 :heartpulse:
 
 ```shell
 go run main.go
@@ -111,7 +111,7 @@ go run main.go
 本项目修改端口请查看`main.go`
 
 
-## 编译
+## 编译 :exclamation:
 ```shell
 go build main.go
 ```
