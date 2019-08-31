@@ -22,7 +22,6 @@ func SendEmail(username string, password string, host string, to []string, subje
 	content_type := "Content-Type: text/plain" + "; charset=UTF-8"
 	isSuccess := make(chan string)
 	for _, i := range to {
-		// 异步同时发送多个邮件. goroutine!启动！
 		go func(i string) {
 			msg := []byte("To: " + i + "\r\n" +
 				"From: " + username + "\r\n" +
@@ -30,15 +29,18 @@ func SendEmail(username string, password string, host string, to []string, subje
 				content_type + "\r\n\r\n" +
 				body)
 			if err := smtp.SendMail(fmt.Sprintf("%s:25", host), auth, username, []string{i}, msg); err != nil {
-				panic(err)
+				fmt.Printf("%s邮箱格式不正确.\n", i)
+			} else {
+				fmt.Printf("[Email] 给%s发送成功！", i)
 			}
+
 			// 防止程序提前退出
 			isSuccess <- i
 		}(i)
 	}
 
 	for i := 0; i < len(to); i++ {
-		temp := <-isSuccess
-		fmt.Println(temp + "已经发送成功！")
+		<-isSuccess
 	}
+
 }
