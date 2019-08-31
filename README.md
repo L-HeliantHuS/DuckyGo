@@ -60,7 +60,7 @@ Singo: Simple Single Golang Web Service :sparkles:
 
 ```
 
-## Godotenv :yello_heart:
+## Godotenv :yellow_heart:
 
 项目在启动的时候依赖以下环境变量，但是在也可以在项目根目录创建.env文件设置环境变量便于使用(建议开发环境使用)
 
