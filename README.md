@@ -6,6 +6,18 @@
 
 本项目采用了一系列Golang中比较流行的组件，可以以本项目为基础快速搭建Restful Web API
 
+## 说明  :shipit:
+响应序列化:
+```text
+任何一个json返回值，都是以serializer.Response进行序列化出来
+最后在api(controll)层c.JSON返回的时候加.Result() 进行加TimeStamp
+```
+
+业务逻辑:
+```text
+api层不允许出现数据库操作, 所有的数据库操作都在service层进行. api层只进行大体的业务逻辑和序列化.
+```
+
 ## 特色 :blue_heart:
 
 本项目已经整合了许多开发API所必要的组件：
