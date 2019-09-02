@@ -15,8 +15,7 @@ type User struct {
 
 // UserResponse 单个用户序列化
 type UserResponse struct {
-	Response
-	Data User `json:"data"`
+	Data User `json:"user"`
 }
 
 // BuildUser 序列化用户

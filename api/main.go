@@ -37,7 +37,7 @@ func ErrorResponse(err error) serializer.Response {
 				Status: 40001,
 				Msg:    fmt.Sprintf("%s%s", field, tag),
 				Error:  fmt.Sprint(err),
-			}.Result()
+			}
 		}
 	}
 	if _, ok := err.(*json.UnmarshalTypeError); ok {
@@ -45,12 +45,12 @@ func ErrorResponse(err error) serializer.Response {
 			Status: 40001,
 			Msg:    "JSON类型不匹配",
 			Error:  fmt.Sprint(err),
-		}.Result()
+		}
 	}
 
 	return serializer.Response{
 		Status: 40001,
 		Msg:    "参数错误",
 		Error:  fmt.Sprint(err),
-	}.Result()
+	}
 }

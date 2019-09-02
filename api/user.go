@@ -13,10 +13,10 @@ func UserRegister(c *gin.Context) {
 	var service service.UserRegisterService
 	if err := c.ShouldBind(&service); err == nil {
 		if user, err := service.Register(); err != nil {
-			c.JSON(200, err)
+			c.JSON(200, err.Result())
 		} else {
-			res := serializer.BuildUserResponse(user).Result()
-			c.JSON(200, res)
+			res := serializer.Response{Data: serializer.BuildUserResponse(user)}
+			c.JSON(200, res.Result())
 		}
 	} else {
 		c.JSON(200, ErrorResponse(err).Result())
@@ -36,8 +36,8 @@ func UserLogin(c *gin.Context) {
 			s.Set("user_id", user.ID)
 			s.Save()
 
-			res := serializer.BuildUserResponse(user).Result()
-			c.JSON(200, res)
+			res := serializer.Response{Data: serializer.BuildUserResponse(user)}
+			c.JSON(200, res.Result())
 		}
 	} else {
 		c.JSON(200, ErrorResponse(err).Result())
@@ -47,8 +47,8 @@ func UserLogin(c *gin.Context) {
 // UserMe 用户详情
 func UserMe(c *gin.Context) {
 	user := CurrentUser(c)
-	res := serializer.BuildUserResponse(*user).Result()
-	c.JSON(200, res)
+	res := serializer.Response{Data: serializer.BuildUserResponse(*user)}
+	c.JSON(200, res.Result())
 }
 
 // ChangePassword 修改密码
@@ -57,7 +57,7 @@ func ChangePassword(c *gin.Context) {
 	var service service.ChangePassword
 	if err := c.ShouldBind(&service); err == nil {
 		res := service.Change(user)
-		c.JSON(200, res)
+		c.JSON(200, res.Result())
 	} else {
 		c.JSON(200, ErrorResponse(err).Result())
 	}
