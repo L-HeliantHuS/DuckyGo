@@ -67,7 +67,7 @@
 
 ```shell
 MYSQL_DSN="db_user:db_passwd@tcp(127.0.0.1:3306)/db_name?charset=utf8&parseTime=True&loc=Local" # Mysql连接配置
-RABBITMQ_DSN="amqp://mq_user:mq_passwd@localhost:5672/virtual_host"                             # RabbitMQ连接配置
+RABBITMQ_DSN="amqp://mq_user:mq_passwd@localhost:5672/virtual_host"                             # RabbitMQ连接配置 默认没有开启
 REDIS_ADDR="127.0.0.1:6379" # Redis端口和地址
 REDIS_PW=""                 # Redis连接密码
 REDIS_DB=""                 # Redis库从0到10，不填即为0
