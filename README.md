@@ -1,6 +1,6 @@
-# Singo-WebFrameWork  (基于gin+gorm搭建的快速高效稳定的web restful api)
+# DuckyGo-WebFrameWork  (基于gin+gorm搭建的快速高效稳定的web restful api)
 
-Singo: Simple Single Golang Web Service :sparkles:
+DuckyGo: Simple Single Golang Web Service :sparkles:
 
 项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest :fire:
 

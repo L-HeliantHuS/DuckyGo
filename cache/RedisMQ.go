@@ -3,7 +3,7 @@ package cache
 import (
 	"fmt"
 	"log"
-	"singo/util"
+	"DuckyGo/util"
 )
 
 type RedisMessageQueue struct {

@@ -1,4 +1,4 @@
-module singo
+module DuckyGo
 
 go 1.12
 

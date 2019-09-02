@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"singo/model"
-	"singo/serializer"
+	"DuckyGo/model"
+	"DuckyGo/serializer"
 )
 
 // CurrentUser 获取登录用户

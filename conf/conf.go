@@ -3,9 +3,9 @@ package conf
 import (
 	"github.com/gin-gonic/gin"
 	"os"
-	"singo/cache"
-	"singo/model"
-	"singo/util"
+	"DuckyGo/cache"
+	"DuckyGo/model"
+	"DuckyGo/util"
 
 	"github.com/joho/godotenv"
 )

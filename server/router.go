@@ -2,8 +2,8 @@ package server
 
 import (
 	"os"
-	"singo/api"
-	"singo/middleware"
+	"DuckyGo/api"
+	"DuckyGo/middleware"
 
 	"github.com/gin-gonic/gin"
 )

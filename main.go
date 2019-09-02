@@ -1,8 +1,8 @@
 package main
 
 import (
-	"singo/conf"
-	"singo/server"
+	"DuckyGo/conf"
+	"DuckyGo/server"
 )
 
 func main() {

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"singo/model"
-	"singo/serializer"
+	"DuckyGo/model"
+	"DuckyGo/serializer"
 )
 
 // UserLoginService 管理用户登录的服务

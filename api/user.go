@@ -1,8 +1,8 @@
 package api
 
 import (
-	"singo/serializer"
-	"singo/service"
+	"DuckyGo/serializer"
+	"DuckyGo/service"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

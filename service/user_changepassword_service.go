@@ -1,8 +1,8 @@
 package service
 
 import (
-	"singo/model"
-	"singo/serializer"
+	"DuckyGo/model"
+	"DuckyGo/serializer"
 )
 
 // ChangePassword 修改用户密码

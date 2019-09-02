@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/streadway/amqp"
 	"log"
-	"singo/util"
+	"DuckyGo/util"
 )
 
 // 创建RabbitMQ连接单例

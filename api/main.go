@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/go-playground/validator.v8"
-	"singo/conf"
-	"singo/model"
-	"singo/serializer"
-	"singo/util"
+	"DuckyGo/conf"
+	"DuckyGo/model"
+	"DuckyGo/serializer"
+	"DuckyGo/util"
 )
 
 // Ping 状态检查页面

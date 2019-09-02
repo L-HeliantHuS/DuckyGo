@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"singo/util"
+	"DuckyGo/util"
 )
 
 func SaveLog() gin.HandlerFunc {
