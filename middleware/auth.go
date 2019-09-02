@@ -1,11 +1,11 @@
 package middleware
 
 import (
+	"DuckyGo/model"
+	"DuckyGo/serializer"
 	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"DuckyGo/model"
-	"DuckyGo/serializer"
 )
 
 // CurrentUser 获取登录用户
@@ -36,7 +36,7 @@ func AuthRequired() gin.HandlerFunc {
 		c.JSON(200, serializer.Response{
 			Status: 40003,
 			Msg:    "需要登录",
-		})
+		}.Result())
 		c.Abort()
 	}
 }
@@ -54,7 +54,7 @@ func AuthAdmin() gin.HandlerFunc {
 		c.JSON(200, serializer.Response{
 			Status: 40005,
 			Msg:    "你没有权限进行此操作.",
-		})
+		}.Result())
 		c.Abort()
 	}
 }

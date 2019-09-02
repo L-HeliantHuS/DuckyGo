@@ -15,11 +15,11 @@ func UserRegister(c *gin.Context) {
 		if user, err := service.Register(); err != nil {
 			c.JSON(200, err)
 		} else {
-			res := serializer.BuildUserResponse(user)
+			res := serializer.BuildUserResponse(user).Result()
 			c.JSON(200, res)
 		}
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(200, ErrorResponse(err).Result())
 	}
 }
 
@@ -36,18 +36,18 @@ func UserLogin(c *gin.Context) {
 			s.Set("user_id", user.ID)
 			s.Save()
 
-			res := serializer.BuildUserResponse(user)
+			res := serializer.BuildUserResponse(user).Result()
 			c.JSON(200, res)
 		}
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(200, ErrorResponse(err).Result())
 	}
 }
 
 // UserMe 用户详情
 func UserMe(c *gin.Context) {
 	user := CurrentUser(c)
-	res := serializer.BuildUserResponse(*user)
+	res := serializer.BuildUserResponse(*user).Result()
 	c.JSON(200, res)
 }
 
@@ -56,10 +56,10 @@ func ChangePassword(c *gin.Context) {
 	user := CurrentUser(c)
 	var service service.ChangePassword
 	if err := c.ShouldBind(&service); err == nil {
-		    res := service.Change(user)
-			c.JSON(200, res)
+		res := service.Change(user)
+		c.JSON(200, res)
 	} else {
-		c.JSON(200, ErrorResponse(err))
+		c.JSON(200, ErrorResponse(err).Result())
 	}
 }
 
@@ -71,5 +71,5 @@ func UserLogout(c *gin.Context) {
 	c.JSON(200, serializer.Response{
 		Status: 0,
 		Msg:    "登出成功",
-	})
+	}.Result())
 }
