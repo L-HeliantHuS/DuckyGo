@@ -25,14 +25,14 @@ type Logger struct {
 	level int
 }
 
-func (ll *Logger) saveLog(log string) error {
+func (ll *Logger) saveLog(log string, level int) error {
 	logLevelMap := map[int]string{
 		LevelError:         "ERROR",
 		LevelWarning:       "WARNING",
 		LevelInformational: "INFO",
 		LevelDebug:         "DEBUG",
 	}
-	filename := fmt.Sprintf("log/%s.log", logLevelMap[ll.level])
+	filename := fmt.Sprintf("log/%s.log", logLevelMap[level])
 	file, err := os.OpenFile(filename, os.O_WRONLY, 0644)
 	if err != nil {
 		panic(err)
@@ -43,9 +43,9 @@ func (ll *Logger) saveLog(log string) error {
 }
 
 // Println 打印
-func (ll *Logger) Println(msg string) {
+func (ll *Logger) Println(msg string, level int) {
 	s := fmt.Sprintf("%s %s \n", time.Now().Format("2006-01-02 15:04:05 -0700"), msg)
-	_ = ll.saveLog(s)
+	_ = ll.saveLog(s, level)
 	fmt.Println(s)
 }
 
@@ -55,7 +55,7 @@ func (ll *Logger) Panic(format string) {
 		return
 	}
 	msg := fmt.Sprintf("[Panic] " + format)
-	ll.Println(msg)
+	ll.Println(msg, LevelError)
 	os.Exit(0)
 }
 
@@ -65,7 +65,7 @@ func (ll *Logger) Error(format string) {
 		return
 	}
 	msg := fmt.Sprintf("[E] " + format)
-	ll.Println(msg)
+	ll.Println(msg, LevelError)
 }
 
 // Warning 警告
@@ -74,7 +74,7 @@ func (ll *Logger) Warning(format string) {
 		return
 	}
 	msg := fmt.Sprintf("[W] " + format)
-	ll.Println(msg)
+	ll.Println(msg, LevelWarning)
 }
 
 // Info 信息
@@ -83,7 +83,7 @@ func (ll *Logger) Info(format string) {
 		return
 	}
 	msg := fmt.Sprintf("[I] " + format)
-	ll.Println(msg)
+	ll.Println(msg, LevelInformational)
 }
 
 // Debug 校验
@@ -92,7 +92,7 @@ func (ll *Logger) Debug(format string) {
 		return
 	}
 	msg := fmt.Sprintf("[D] " + format)
-	ll.Println(msg)
+	ll.Println(msg, LevelDebug)
 }
 
 // BuildLogger 构建logger

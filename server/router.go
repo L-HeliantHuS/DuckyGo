@@ -1,9 +1,9 @@
 package server
 
 import (
-	"os"
 	"DuckyGo/api"
 	"DuckyGo/middleware"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,7 +16,7 @@ func NewRouter() *gin.Engine {
 
 	// 中间件, 顺序不能改
 	// 这条是为了防止因为记录日志而导致性能损失
-	if os.Getenv("DEBUG") == "DEBUG" {
+	if os.Getenv("LOG_LEVEL") == "DEBUG" {
 		r.Use(middleware.SaveLog())
 	}
 	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
