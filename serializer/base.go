@@ -1,0 +1,38 @@
+package serializer
+
+import "DuckyGo/model"
+
+// Base 主要序列化器
+type Base struct {
+	Base string `json:"data"`
+}
+
+// BaseOne 单个数据序列化器
+type BaseOne struct {
+	Result Lianjia `json:"result"`
+}
+
+// BaseAll 多个数据序列化器
+type BaseAll struct {
+	Results []Lianjia `json:"results"`
+	Count   int       `json:"count"`
+}
+
+// BaseResponse 主要序列化响应
+func BaseResponse(db model.User) Base {
+	return Base{}
+}
+
+// BaseOneResponse 单个数据序列化响应
+func BaseOneResponse(db model.User) BaseOne {
+	return BaseOne{}
+}
+
+// BaseAllResponse 多个数据序列化响应
+func BaseAllResponse(db []model.User, count int) BaseAll {
+	var result []Base
+	for _, i := range db {
+		result = append(result, BaseResponse(i))
+	}
+	return BaseAll{}
+}
