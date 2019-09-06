@@ -9,13 +9,13 @@ type Base struct {
 
 // BaseOne 单个数据序列化器
 type BaseOne struct {
-	Result Lianjia `json:"result"`
+	Result Base `json:"result"`
 }
 
 // BaseAll 多个数据序列化器
 type BaseAll struct {
-	Results []Lianjia `json:"results"`
-	Count   int       `json:"count"`
+	Results []Base `json:"results"`
+	Count   int    `json:"count"`
 }
 
 // BaseResponse 主要序列化响应
