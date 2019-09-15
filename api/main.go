@@ -17,6 +17,11 @@ func Ping(c *gin.Context) {
 	}.Result())
 }
 
+// Index 主页
+func Index(c *gin.Context) {
+	c.String(200, "Welcome to DuckyGo Restful API Index Page!   https://github.com/L-HeliantHuS/DuckyGo")
+}
+
 // CurrentUser 获取当前用户
 func CurrentUser(c *gin.Context) *model.User {
 	if user, _ := c.Get("user"); user != nil {
