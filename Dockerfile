@@ -20,9 +20,8 @@ ENV SESSION_SECRE="4T8I9T48I094T389013h98r0PIK6Y5LUH5IJOWE"
 ENV GIN_MODE="release"
 ENV PORT=8000
 
-# 创建翻译文件目录
+# 创建翻译文件和日志文件目录  不要问为什么没有log日志文件夹 生产从不需要日志！！ (滑稽
 RUN mkdir -p /www/conf/locales
-RUN mkdir -p /www/log
 
 WORKDIR /www
 
