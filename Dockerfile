@@ -12,9 +12,9 @@ RUN CGO_ENABLED=0 GOOS=linux GO111MODULE=on GOARCH=amd64 go build -o duckygo
 FROM alpine
 
 # 配置环境变量 这里注意ip地址不可以填写127.0.0.1了~ 因为是在当前的容器里面 当前容器并没有 mysql 和 redis...
-ENV MYSQL_DSN="root:1984441370@tcp(172.168.70.171:8052)/helianthus?charset=utf8&parseTime=True&loc=Local"
+ENV MYSQL_DSN="db_user:db_passwd@tcp(172.168.70.171:8052)/db_name?charset=utf8&parseTime=True&loc=Local"
 ENV REDIS_ADDR="172.168.70.171:8051"
-ENV REDIS_PW="1984441370"
+ENV REDIS_PW=""
 ENV REDIS_DB="0"
 ENV SESSION_SECRE="4T8I9T48I094T389013h98r0PIK6Y5LUH5IJOWE"
 ENV GIN_MODE="release"
@@ -30,7 +30,6 @@ COPY --from=build /DuckyGo/duckygo /usr/bin/duckygo
 
 # 将翻译文件添加到本容器
 ADD ./conf/locales /www/conf/locales
-ADD ./log /www/log
 
 RUN chmod +x /usr/bin/duckygo
 
