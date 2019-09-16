@@ -128,4 +128,12 @@ go run main.go
 ```shell
 go build main.go
 ```
+
+Docker运行:
+```shell
+docker build -t duckygo:release .
+
+docker run -di --name duckygo -p 8000:8000 duckygo:release
+
+```
 如需交叉编译请看[这里](https://studygolang.com/articles/13760)
