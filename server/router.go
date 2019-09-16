@@ -19,7 +19,7 @@ func NewRouter() *gin.Engine {
 	if os.Getenv("LOG_LEVEL") == "DEBUG" {
 		r.Use(middleware.SaveLog())
 	}
-	r.Use(middleware.Session(os.Getenv("SESSION_SECRET")))
+	r.Use(middleware.SessionCookie(os.Getenv("SESSION_SECRET")))
 	r.Use(middleware.Cors())
 	r.Use(middleware.CurrentUser())
 
