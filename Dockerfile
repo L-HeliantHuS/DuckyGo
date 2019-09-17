@@ -33,6 +33,7 @@ ADD ./conf/locales /www/conf/locales
 
 RUN chmod +x /usr/bin/duckygo
 
+# 开放端口
 EXPOSE 8000
 
 # 执行
