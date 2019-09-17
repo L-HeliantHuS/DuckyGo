@@ -17,7 +17,7 @@ func InitRabbitMQ(amqpUrl string) {
 
 	channel, err := connection.Channel()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	Channel = channel
