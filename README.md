@@ -2,6 +2,8 @@
 
 项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest :fire:
 
+参考视频: [使用DuckyGo进行快速Restful API开发](https://www.bilibili.com/video/av66388356)
+
 ## 目的 :star2:
 
 本项目采用了一系列Golang中比较流行的组件，可以以本项目为基础快速搭建Restful Web API
