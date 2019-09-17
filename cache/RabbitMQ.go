@@ -1,10 +1,8 @@
 package cache
 
 import (
-	"fmt"
 	"github.com/streadway/amqp"
 	"log"
-	"DuckyGo/util"
 )
 
 // 创建RabbitMQ连接单例
@@ -19,7 +17,7 @@ func InitRabbitMQ(amqpUrl string) {
 
 	channel, err := connection.Channel()
 	if err != nil {
-		util.Log().Panic(fmt.Sprint(err))
+		panic(err)
 	}
 
 	Channel = channel
