@@ -10,16 +10,16 @@ import (
 	"gopkg.in/go-playground/validator.v8"
 )
 
+// Index 主页
+func Index(c *gin.Context) {
+	c.String(200, "================   Welcome to DuckyGo Restful API Index Page!     https://github.com/L-HeliantHuS/DuckyGo   ================")
+}
+
 // Ping 状态检查页面
 func Ping(c *gin.Context) {
 	c.JSON(200, serializer.Response{
 		Msg: "Pong",
 	}.Result())
-}
-
-// Index 主页
-func Index(c *gin.Context) {
-	c.String(200, "Welcome to DuckyGo Restful API Index Page!   https://github.com/L-HeliantHuS/DuckyGo")
 }
 
 // CurrentUser 获取当前用户

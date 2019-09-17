@@ -1,9 +1,7 @@
 package cache
 
 import (
-	"fmt"
 	"log"
-	"DuckyGo/util"
 )
 
 type RedisMessageQueue struct {
@@ -30,7 +28,7 @@ func (mq *RedisMessageQueue) Custome(queuename string, cb func(message string) e
 			message, err := RedisClient.BRPop(0, queuename).Result()
 
 			if err != nil {
-				util.Log().Error(fmt.Sprint(err))
+				log.Fatal(err)
 			}
 
 			err = cb(message[1])
