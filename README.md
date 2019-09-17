@@ -1,5 +1,7 @@
 # DuckyGo (基于gin+gorm搭建的快速高效稳定的web restful api)
 
+![image]("https://github.com/L-HeliantHuS/DuckyGo/DuckyGo.png")
+
 项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest :fire:
 
 参考视频: [使用DuckyGo进行快速Restful API开发](https://www.bilibili.com/video/av66388356)
