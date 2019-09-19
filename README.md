@@ -7,7 +7,7 @@
 
 项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest :fire:
 
-- DuckyGo的亲兄弟DuckyGo-MVC: [基于Gin+Pongo2gin+Gorm的MVC开发框架](https://github.com/L-HeliantHuS/DuckyGo-MVC)
+- DuckyGo-MVC(模板语言和Django一模一样): [基于Gin+Pongo2gin+Gorm的MVC开发框架](https://github.com/L-HeliantHuS/DuckyGo-MVC)
 - 参考视频: [使用DuckyGo进行快速Restful API开发](https://www.bilibili.com/video/av66388356)
 
 ## 目的 :star2:
