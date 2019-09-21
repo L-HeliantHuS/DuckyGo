@@ -94,6 +94,7 @@ REDIS_DB=""                 # Redis库从0到10，不填即为0
 SESSION_SECRE=""            # Seesion密钥，必须设置而且不要泄露
 GIN_MODE="debug"            # 设置gin的运行模式，有 debug 和 release
 LOG_LEVEL="ERROR"           # 设置为ERROR基本不会记录log 设置为DEBUG则会详细记录每次请求
+RIM="notuse"                # 设置为use的时候会启动mysql之类的连接，非设置为notuse就会关闭mysql连接
 ```
 
 Windows安装MySQL和Redis麻烦?:no_mouth: 你可以使用[Docker](https://hub.docker.com/)啊！:sunglasses:
