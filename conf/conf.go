@@ -1,11 +1,11 @@
 package conf
 
 import (
-	"github.com/gin-gonic/gin"
-	"os"
 	"DuckyGo/cache"
 	"DuckyGo/model"
 	"DuckyGo/util"
+	"github.com/gin-gonic/gin"
+	"os"
 
 	"github.com/joho/godotenv"
 )
@@ -26,12 +26,15 @@ func Init() {
 		panic(err)
 	}
 
-	// 启动各种连接单例
-	model.Database(os.Getenv("MYSQL_DSN"))
-	cache.Redis()
-	cache.InitRedisMQ()
-	//cache.InitRabbitMQ(os.Getenv("RABBITMQ_DSN"))
+	if os.Getenv("RIM") == "use" {
+		// 启动各种连接单例
+		model.Database(os.Getenv("MYSQL_DSN"))
+		cache.Redis()
+		cache.InitRedisMQ()
+		//cache.InitRabbitMQ(os.Getenv("RABBITMQ_DSN"))
 
-	// 启动其他异步服务 (RedisMQ, RabbitMQ的应用
+		// 启动其他异步服务 (RedisMQ, RabbitMQ的应用
+
+	}
 
 }
