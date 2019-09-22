@@ -3,7 +3,6 @@ package conf
 import (
 	"DuckyGo/cache"
 	"DuckyGo/model"
-	"DuckyGo/util"
 	"github.com/gin-gonic/gin"
 	"os"
 
@@ -14,8 +13,6 @@ import (
 func Init() {
 	// 从本地读取环境变量
 	_ = godotenv.Load()
-
-	util.BuildLogger(os.Getenv("LOG_LEVEL"))
 
 	if os.Getenv("GIN_MODE") == gin.ReleaseMode {
 		gin.SetMode(gin.ReleaseMode)
