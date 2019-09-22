@@ -20,7 +20,7 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.CurrentUser())
 
 	// 主页.
-	r.GET("/", api.Index)
+	r.Any("/", api.Index)
 
 	// 路由
 	v1 := r.Group("/api/v1")

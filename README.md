@@ -59,11 +59,11 @@ api层不允许出现数据库操作, 所有的数据库操作都在service层�
 6. auth权限控制文件夹
 7. util一些小工具, 目前有randomString、Logger、SendEmail
 8. conf放一些静态存放的配置文件，其中locales内放置翻译相关的配置文件
-9. log放生成的日志文件，第一次使用需要双击运行一下bat文件生成log文件.
+9. ~~log放生成的日志文件，第一次使用需要双击运行一下bat文件生成log文件.~~
 
-## LOG_LEVEL说明 :purple_heart:
+## ~~LOG_LEVEL说明 :purple_heart:~~
 
-第一次使用要先运行`log`文件夹下的`bat`批处理，用来生成记录log所需要的log文件.
+~~第一次使用要先运行`log`文件夹下的`bat`批处理，用来生成记录log所需要的log文件.~~
 
 ```text
 
@@ -80,6 +80,7 @@ api层不允许出现数据库操作, 所有的数据库操作都在service层�
 则全部显示
 
 ```
+
 
 ## Godotenv :yellow_heart:
 
