@@ -22,7 +22,7 @@ func NewRouter() *gin.Engine {
 	// 主页.
 	r.Any("/", api.Index)
 
-	// 路由
+	// v1 最基本网站需要
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("ping", api.Ping)
@@ -49,7 +49,22 @@ func NewRouter() *gin.Engine {
 
 			}
 		}
+	}
+
+	// v2 特殊情况需要 列如: 微信小程序等无法使用session维持会话的场景
+	v2 := r.Group("/api/v2")
+	{
+		// 获得token
+		v2.GET("sign", api.GetJwtToken)
+
+		// 使用中间件验证.
+		jwt := v2.Group("")
+		jwt.Use(middleware.JwtRequired())
+		{
+			jwt.GET("ping", api.HelloJwt)
+		}
 
 	}
+
 	return r
 }

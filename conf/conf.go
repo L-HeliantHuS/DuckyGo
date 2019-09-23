@@ -4,9 +4,13 @@ import (
 	"DuckyGo/cache"
 	"DuckyGo/model"
 	"github.com/gin-gonic/gin"
-	"os"
-
 	"github.com/joho/godotenv"
+	"os"
+)
+
+// 全局参数
+var (
+	SigningKey = []byte("JwtSecretKey")
 )
 
 // Init 初始化配置项
