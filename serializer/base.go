@@ -7,25 +7,15 @@ type Base struct {
 	Base string `json:"data"`
 }
 
-// BaseOne 单个数据序列化器
-type BaseOne struct {
-	Result Base `json:"result"`
-}
-
 // BaseAll 多个数据序列化器
 type BaseAll struct {
-	Results []Base `json:"results"`
+	Results []Base `json:"list"`
 	Count   int    `json:"count"`
 }
 
 // BaseResponse 主要序列化响应
 func BaseResponse(db model.User) Base {
 	return Base{}
-}
-
-// BaseOneResponse 单个数据序列化响应
-func BaseOneResponse(db model.User) BaseOne {
-	return BaseOne{}
 }
 
 // BaseAllResponse 多个数据序列化响应
