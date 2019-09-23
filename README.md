@@ -8,7 +8,7 @@
 项目基于MIT协议，任何人可以进行修改并发布，如果本项目你发现有任何BUG，欢迎提交PullRequest :fire:
 
 - DuckyGo-MVC(模板语言和Django一模一样): [基于Gin+Pongo2gin+Gorm的MVC开发框架](https://github.com/L-HeliantHuS/DuckyGo-MVC)
-- 参考视频: [使用DuckyGo进行快速Restful API开发](https://www.bilibili.com/video/av66388356)
+- DuckyGo参考视频: [使用DuckyGo进行快速Restful API开发](https://www.bilibili.com/video/av66388356)
 
 ## 目的 :star2:
 
@@ -39,6 +39,7 @@ api层不允许出现数据库操作, 所有的数据库操作都在service层�
 7. 橙卡大佬实现了国际化i18n的一些基本功能.
 8. 本项目是使用Redis来保存用户Session登陆状态.
 9. 使用Redis-list实现了内部消息队列,发送邮件可实现完全异步发送.
+10. 同时实现了session和jwt验证， 让用户可以自己选择而不用自己造轮子.
 
 本项目已经预先实现了一些常用的代码方便参考和复用:
 
@@ -48,6 +49,8 @@ api层不允许出现数据库操作, 所有的数据库操作都在service层�
 4. 实现了```/api/v1/user/me```用户资料接口(需要登录后获取session)
 5. 实现了```/api/v1/user/logout```用户登出接口(需要登录后获取session)
 6. 实现了```/api/v1/user/changepassword```用户修改密码接口
+7. 实现了```/api/v2/sign```获得jwtToken
+8. 实现了```/api/v2/ping```测试jwtToken可用性
 
 本项目已经预先创建了一系列文件夹划分出下列模块:
 
