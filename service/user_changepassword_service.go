@@ -15,8 +15,8 @@ type ChangePassword struct {
 func (service *ChangePassword) Valid() *serializer.Response {
 	if service.PasswordConfirm != service.Password {
 		return &serializer.Response{
-			Status: 40001,
-			Msg:    "两次输入的密码不相同",
+			Code: 40001,
+			Msg:  "两次输入的密码不相同",
 		}
 	}
 
@@ -34,21 +34,21 @@ func (service *ChangePassword) Change(user *model.User) *serializer.Response {
 	// 加密密码
 	if err := user.SetPassword(service.Password); err != nil {
 		return &serializer.Response{
-			Status: 50001,
-			Msg:    "加密密码出现错误.",
+			Code: 50001,
+			Msg:  "加密密码出现错误.",
 		}
 	}
 
 	// 更新数据库
 	if err := model.DB.Save(&user).Error; err != nil {
 		return &serializer.Response{
-			Status: 50001,
-			Msg:    "更新数据库出现错误。",
+			Code: 50001,
+			Msg:  "更新数据库出现错误。",
 		}
 	}
 
 	return &serializer.Response{
-		Data:   serializer.BuildUser(*user),
-		Msg:    "修改密码成功！",
+		Data: serializer.BuildUser(*user),
+		Msg:  "修改密码成功！",
 	}
 }
