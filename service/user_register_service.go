@@ -67,8 +67,8 @@ func (service *UserRegisterService) Register() (model.User, *serializer.Response
 	// 创建用户
 	if err := model.DB.Create(&user).Error; err != nil {
 		return user, &serializer.Response{
-			Status: 40002,
-			Msg:    "注册失败",
+			Code: 40002,
+			Msg:  "注册失败",
 		}
 	}
 

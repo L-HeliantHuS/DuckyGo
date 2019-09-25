@@ -34,8 +34,8 @@ func AuthRequired() gin.HandlerFunc {
 		}
 
 		c.JSON(200, serializer.Response{
-			Status: 40003,
-			Msg:    "需要登录",
+			Code: 40003,
+			Msg:  "需要登录",
 		}.Result())
 		c.Abort()
 	}
@@ -52,8 +52,8 @@ func AuthAdmin() gin.HandlerFunc {
 			}
 		}
 		c.JSON(200, serializer.Response{
-			Status: 40005,
-			Msg:    "你没有权限进行此操作.",
+			Code: 40005,
+			Msg:  "你没有权限进行此操作.",
 		}.Result())
 		c.Abort()
 	}

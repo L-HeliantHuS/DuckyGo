@@ -16,8 +16,8 @@ func JwtRequired() gin.HandlerFunc {
 		// 判断请求头中是否有token
 		if userToken == "" {
 			c.JSON(200, serializer.Response{
-				Status: 40003,
-				Msg:    "令牌不能为空！",
+				Code: 40003,
+				Msg:  "令牌不能为空！",
 			}.Result())
 			c.Abort()
 			return
@@ -30,8 +30,8 @@ func JwtRequired() gin.HandlerFunc {
 		if token.Valid != true {
 			// 过期或者非正确处理
 			c.JSON(200, serializer.Response{
-				Status: 40003,
-				Msg:    "令牌错误！",
+				Code: 40003,
+				Msg:  "令牌错误！",
 			}.Result())
 			c.Abort()
 		}
