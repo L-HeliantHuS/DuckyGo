@@ -21,10 +21,7 @@
 最后在api(controll)层c.JSON返回的时候加.Result() 进行加TimeStamp
 ```
 
-业务逻辑:
-```text
-api层不允许出现数据库操作, 所有的数据库操作都在service层进行. api层只进行大体的业务逻辑和序列化.
-```
+- 本项目自带Python写的接口测试, 在根目录下的`DuckyGoTest.py`, 按照自己需求更改即可流畅的完成测试~
 
 ## 特色 :blue_heart:
 
@@ -57,7 +54,7 @@ api层不允许出现数据库操作, 所有的数据库操作都在service层�
 1. api文件夹就是MVC框架的controller，负责协调各部件完成任务
 2. model文件夹负责存储数据库模型和数据库操作相关的代码
 3. service负责处理比较复杂的业务，把业务代码模型化可以有效提高业务代码的质量（比如用户注册，充值，下单等）
-4. serializer储存通用的json模型，把model得到的数据库模型转换成api需要的json对象
+4. serializer储存通用的json模型，把model得到的数据库模型转换成api需要的json对象, 以及定义API的Code值
 5. cache负责redis, RabbitMQ缓存相关的代码
 6. auth权限控制文件夹
 7. util一些小工具, 目前有randomString、Logger、SendEmail
@@ -141,6 +138,7 @@ go run main.go
 ```shell
 go build main.go
 ```
+
 
 Docker运行:
 ```shell
