@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 
@@ -22,7 +23,7 @@ func Redis() {
 	_, err := client.Ping().Result()
 
 	if err != nil {
-		panic(err)
+		panic(fmt.Sprintf("连接Redis出现异常: %v", err))
 	}
 
 	RedisClient = client

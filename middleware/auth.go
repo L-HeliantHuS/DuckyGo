@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // CurrentUser 获取登录用户
@@ -33,8 +34,8 @@ func AuthRequired() gin.HandlerFunc {
 			}
 		}
 
-		c.JSON(200, serializer.Response{
-			Code: 40003,
+		c.JSON(http.StatusOK, serializer.Response{
+			Code: serializer.UserNotPermissionError,
 			Msg:  "需要登录",
 		}.Result())
 		c.Abort()
@@ -51,8 +52,8 @@ func AuthAdmin() gin.HandlerFunc {
 				return
 			}
 		}
-		c.JSON(200, serializer.Response{
-			Code: 40005,
+		c.JSON(http.StatusOK, serializer.Response{
+			Code: serializer.UserNotPermissionError,
 			Msg:  "你没有权限进行此操作.",
 		}.Result())
 		c.Abort()

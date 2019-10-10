@@ -15,7 +15,7 @@ type ChangePassword struct {
 func (service *ChangePassword) Valid() *serializer.Response {
 	if service.PasswordConfirm != service.Password {
 		return &serializer.Response{
-			Code: 40001,
+			Code: serializer.UserInputError,
 			Msg:  "两次输入的密码不相同",
 		}
 	}
@@ -34,7 +34,7 @@ func (service *ChangePassword) Change(user *model.User) *serializer.Response {
 	// 加密密码
 	if err := user.SetPassword(service.Password); err != nil {
 		return &serializer.Response{
-			Code: 50001,
+			Code: serializer.ServerPanicError,
 			Msg:  "加密密码出现错误.",
 		}
 	}
@@ -42,7 +42,7 @@ func (service *ChangePassword) Change(user *model.User) *serializer.Response {
 	// 更新数据库
 	if err := model.DB.Save(&user).Error; err != nil {
 		return &serializer.Response{
-			Code: 50001,
+			Code: serializer.DatabaseWriteError,
 			Msg:  "更新数据库出现错误。",
 		}
 	}

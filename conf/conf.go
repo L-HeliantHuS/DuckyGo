@@ -3,9 +3,11 @@ package conf
 import (
 	"DuckyGo/cache"
 	"DuckyGo/model"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"os"
+	"time"
 )
 
 // 全局参数
@@ -36,6 +38,21 @@ func Init() {
 
 		// 启动其他异步服务 (RedisMQ, RabbitMQ的应用
 
+	}
+
+	if gin.Mode() == gin.ReleaseMode {
+		go func() {
+			time.Sleep(1 * time.Second)
+			fmt.Println(`
+			 ____             _           ____       
+			|  _ \ _   _  ___| | ___   _ / ___| ___  
+			| | | | | | |/ __| |/ / | | | |  _ / _ \ 
+			| |_| | |_| | (__|   <| |_| | |_| | (_) |
+			|____/ \__,_|\___|_|\_\\__, |\____|\___/ 
+								   |___/             
+			 服务器已经启动成功啦~  现在是Release模式~
+		`)
+		}()
 	}
 
 }

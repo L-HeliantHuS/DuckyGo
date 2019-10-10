@@ -3,6 +3,7 @@ package api
 import (
 	"DuckyGo/serializer"
 	"DuckyGo/service"
+	"net/http"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -13,13 +14,13 @@ func UserRegister(c *gin.Context) {
 	var service service.UserRegisterService
 	if err := c.ShouldBind(&service); err == nil {
 		if user, err := service.Register(); err != nil {
-			c.JSON(200, err.Result())
+			c.JSON(http.StatusOK, err.Result())
 		} else {
 			res := serializer.Response{Data: serializer.BuildUserResponse(user)}
-			c.JSON(200, res.Result())
+			c.JSON(http.StatusOK, res.Result())
 		}
 	} else {
-		c.JSON(200, ErrorResponse(err).Result())
+		c.JSON(http.StatusOK, ErrorResponse(err).Result())
 	}
 }
 
@@ -28,7 +29,7 @@ func UserLogin(c *gin.Context) {
 	var service service.UserLoginService
 	if err := c.ShouldBind(&service); err == nil {
 		if user, err := service.Login(); err != nil {
-			c.JSON(200, err)
+			c.JSON(http.StatusOK, err)
 		} else {
 			// 设置Session
 			s := sessions.Default(c)
@@ -37,10 +38,10 @@ func UserLogin(c *gin.Context) {
 			s.Save()
 
 			res := serializer.Response{Data: serializer.BuildUserResponse(user)}
-			c.JSON(200, res.Result())
+			c.JSON(http.StatusOK, res.Result())
 		}
 	} else {
-		c.JSON(200, ErrorResponse(err).Result())
+		c.JSON(http.StatusOK, ErrorResponse(err).Result())
 	}
 }
 
@@ -48,7 +49,7 @@ func UserLogin(c *gin.Context) {
 func UserMe(c *gin.Context) {
 	user := CurrentUser(c)
 	res := serializer.Response{Data: serializer.BuildUserResponse(*user)}
-	c.JSON(200, res.Result())
+	c.JSON(http.StatusOK, res.Result())
 }
 
 // ChangePassword 修改密码
@@ -57,9 +58,9 @@ func ChangePassword(c *gin.Context) {
 	var service service.ChangePassword
 	if err := c.ShouldBind(&service); err == nil {
 		res := service.Change(user)
-		c.JSON(200, res.Result())
+		c.JSON(http.StatusOK, res.Result())
 	} else {
-		c.JSON(200, ErrorResponse(err).Result())
+		c.JSON(http.StatusOK, ErrorResponse(err).Result())
 	}
 }
 
@@ -68,7 +69,7 @@ func UserLogout(c *gin.Context) {
 	s := sessions.Default(c)
 	s.Clear()
 	s.Save()
-	c.JSON(200, serializer.Response{
+	c.JSON(http.StatusOK, serializer.Response{
 		Msg: "登出成功",
 	}.Result())
 }

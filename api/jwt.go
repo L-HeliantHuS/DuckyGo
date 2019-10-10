@@ -3,6 +3,7 @@ package api
 import (
 	"DuckyGo/service"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // GetJwtToken 获得Token
@@ -10,8 +11,8 @@ func GetJwtToken(c *gin.Context) {
 	var service service.GetJwtTokenService
 	if err := c.ShouldBind(&service); err == nil {
 		res := service.Get()
-		c.JSON(200, res.Result())
+		c.JSON(http.StatusOK, res.Result())
 	} else {
-		c.JSON(200, ErrorResponse(err).Result())
+		c.JSON(http.StatusOK, ErrorResponse(err).Result())
 	}
 }

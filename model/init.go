@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -19,7 +20,7 @@ func Database(connString string) {
 	db.LogMode(true)
 	// Error
 	if err != nil {
-		panic(err)
+		panic(fmt.Sprintf("连接数据库出现异常: %v", err))
 	}
 	//设置连接池
 	//空闲
