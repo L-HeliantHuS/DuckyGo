@@ -1,7 +1,7 @@
 import requests
 
 # 全局变量
-mainURL = "http://172.168.70.171:8000/api/v1"  # 服务器URL
+mainURL = "http://127.0.0.1:8000/api/v1"  # 服务器URL
 sess = requests.Session()  # 全局Session会话维持
 
 # 测试的用户名和密码 最终的用户名为 "testUser" 密码为 "newtestpassword."
