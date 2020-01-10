@@ -10,6 +10,9 @@
 - DuckyGo-MVC(模板语言和Django一模一样): [基于Gin+Pongo2gin+Gorm的MVC开发框架](https://github.com/L-HeliantHuS/DuckyGo-MVC)
 - DuckyGo参考视频: [使用DuckyGo进行快速Restful API开发](https://www.bilibili.com/video/av66388356)
 
+## 特别感谢 :yum:
+感谢[JetBrains](https://www.jetbrains.com/)提供IDE.
+
 ## 目的 :star2:
 
 本项目采用了一系列Golang中比较流行的组件，可以以本项目为基础快速搭建Restful Web API
@@ -148,3 +151,5 @@ docker run -di --name duckygo -p 8000:8000 duckygo:release
 
 ```
 如需交叉编译请看[这里](https://studygolang.com/articles/13760)
+
+
