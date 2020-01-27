@@ -16,12 +16,17 @@ func NewRouter() *gin.Engine {
 	r.StaticFile("/favicon.ico", "static/favicon.ico")
 
 	// 中间件, 顺序不能改
-	r.Use(middleware.SessionCookie(os.Getenv("SESSION_SECRET")))
+	// 启动Redis的情况下将切换成Redis保存Session.
+	if os.Getenv("RIM") == "use" {
+		r.Use(middleware.SessionRedis(os.Getenv("SESSION_SECRET")))
+	} else {
+		r.Use(middleware.SessionCookie(os.Getenv("SESSION_SECRET")))
+	}
 	r.Use(middleware.Cors())
 	r.Use(middleware.CurrentUser())
 
 	// 主页.
-	r.Any("/", api.Index)
+	r.GET("/", api.Index)
 
 	// v1 最基本网站需要
 	if os.Getenv("v1") == "on" {
