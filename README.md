@@ -36,8 +36,8 @@
 4. [Go-Redis](https://github.com/go-redis/redis): Golang Redis客户端.
 5. [godotenv](https://github.com/joho/godotenv): 开发环境下的环境变量工具，方便使用环境变量.
 6. [Gin-Cors](https://github.com/gin-contrib/cors): Gin框架提供的跨域中间件.
-7. 橙卡大佬实现了国际化i18n的一些基本功能.
-8. 本项目是使用Redis来保存用户Session登陆状态.
+7. 实现了国际化i18n的一些基本功能. (详细在API层调用, conf/下有配置文件)
+8. 本项目自动选择内存或者是Redis来保存用户Session登陆状态.
 9. 使用Redis-list实现了内部消息队列,发送邮件可实现完全异步发送.
 10. 同时实现了session和jwt验证， 让用户可以自己选择而不用自己造轮子.
 
@@ -116,7 +116,7 @@ ALTER USER 'root'@'%' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;           
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'yourpassword';   # 更改密码
 FLUSH PRIVILEGES;                                                                # 刷新
 ```
-    
+
 ## Go Mod :green_heart:
 
 本项目使用[Go Mod](https://github.com/golang/go/wiki/Modules)管理依赖。
