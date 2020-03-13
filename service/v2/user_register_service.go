@@ -1,4 +1,4 @@
-package service
+package v2
 
 import (
 	"DuckyGo/model"
@@ -9,8 +9,8 @@ import (
 type UserRegisterService struct {
 	Nickname        string `form:"nickname" json:"nickname" binding:"required,min=2,max=30"`
 	UserName        string `form:"user_name" json:"user_name" binding:"required,min=5,max=30"`
-	Password        string `form:"password" json:"password" binding:"required,min=8,max=40"`
-	PasswordConfirm string `form:"password_confirm" json:"password_confirm" binding:"required,min=8,max=40"`
+	Password        string `form:"password" json:"password" binding:"required,min=8,max=18"`
+	PasswordConfirm string `form:"password_confirm" json:"password_confirm" binding:"required,min=8,max=18"`
 }
 
 // Valid 验证表单
@@ -44,7 +44,7 @@ func (service *UserRegisterService) Valid() *serializer.Response {
 }
 
 // Register 用户注册
-func (service *UserRegisterService) Register() (model.User, *serializer.Response) {
+func (service *UserRegisterService) Register() *serializer.Response {
 	user := model.User{
 		Nickname: service.Nickname,
 		UserName: service.UserName,
@@ -53,12 +53,12 @@ func (service *UserRegisterService) Register() (model.User, *serializer.Response
 
 	// 表单验证
 	if err := service.Valid(); err != nil {
-		return user, err
+		return err
 	}
 
 	// 加密密码
 	if err := user.SetPassword(service.Password); err != nil {
-		return user, &serializer.Response{
+		return &serializer.Response{
 			Code: serializer.ServerPanicError,
 			Msg:  "密码加密失败",
 		}
@@ -66,11 +66,13 @@ func (service *UserRegisterService) Register() (model.User, *serializer.Response
 
 	// 创建用户
 	if err := model.DB.Create(&user).Error; err != nil {
-		return user, &serializer.Response{
+		return &serializer.Response{
 			Code: serializer.DatabaseWriteError,
 			Msg:  "注册失败",
 		}
 	}
 
-	return user, nil
+	return &serializer.Response{
+		Data:      serializer.BuildUserResponse(user),
+	}
 }

@@ -25,10 +25,7 @@ func JwtRequired() gin.HandlerFunc {
 		}
 
 		// 解码token值
-		token, _ := jwt.ParseWithClaims(userToken, &auth.Jwt{}, func(token *jwt.Token) (interface{}, error) {
-			return conf.SigningKey, nil
-		})
-
+		token, _ := jwt.ParseWithClaims(userToken, &auth.Jwt{}, func(token *jwt.Token) (interface{}, error) { return conf.SigningKey, nil })
 		if token.Valid != true {
 			// 过期或者非正确处理
 			c.JSON(http.StatusOK, serializer.Response{
@@ -36,6 +33,12 @@ func JwtRequired() gin.HandlerFunc {
 				Msg:  "令牌错误！",
 			}.Result())
 			c.Abort()
+		}
+
+
+		// 将结构体地址存入上下文
+		if jwtStruct, ok := token.Claims.(*auth.Jwt); ok {
+			c.Set("user", &jwtStruct.Data)
 		}
 	}
 }

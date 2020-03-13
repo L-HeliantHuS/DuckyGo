@@ -1,4 +1,4 @@
-package service
+package v1
 
 import (
 	"DuckyGo/model"

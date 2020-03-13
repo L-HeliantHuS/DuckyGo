@@ -1,7 +1,8 @@
 package server
 
 import (
-	"DuckyGo/api"
+	"DuckyGo/api/v1"
+	"DuckyGo/api/v2"
 	"DuckyGo/middleware"
 	"DuckyGo/model"
 	"os"
@@ -26,30 +27,30 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.CurrentUser())
 
 	// 主页.
-	r.GET("/", api.Index)
+	r.GET("/", v1.Index)
 
 	// v1 最基本网站需要
 	if os.Getenv("v1") == "on" {
-		v1 := r.Group("/api/v1")
+		sessionGroup := r.Group("/api/v1")
 		{
-			v1.GET("ping", api.Ping)
+			sessionGroup.GET("ping", v1.Ping)
 
 			// 如果没连接数据库就可以不用启动用户模型了.
 			if model.DB != nil {
 				// 用户注册
-				v1.POST("user/register", api.UserRegister)
+				sessionGroup.POST("user/register", v1.UserRegister)
 
 				// 用户登录
-				v1.POST("user/login", api.UserLogin)
+				sessionGroup.POST("user/login", v1.UserLogin)
 
 				// 需要登录保护的
-				auth := v1.Group("")
+				auth := sessionGroup.Group("")
 				auth.Use(middleware.AuthRequired())
 				{
 					// User Routing
-					auth.GET("user/me", api.UserMe)
-					auth.DELETE("user/logout", api.UserLogout)
-					auth.PUT("user/changepassword", api.ChangePassword)
+					auth.GET("user/me", v1.UserMe)
+					auth.DELETE("user/logout", v1.UserLogout)
+					auth.PUT("user/changepassword", v1.ChangePassword)
 
 					// 需要是管理员
 					admin := auth.Group("")
@@ -64,16 +65,21 @@ func NewRouter() *gin.Engine {
 
 	// v2 特殊情况需要 列如: 微信小程序等无法使用session维持会话的场景
 	if os.Getenv("v2") == "on" {
-		v2 := r.Group("/api/v2")
+		jwtGroup := r.Group("/api/v2")
 		{
-			// 获得token
-			v2.GET("sign", api.GetJwtToken)
+			// 注册
+			jwtGroup.POST("user/register", v2.UserRegister)
+
+			// 登录获得Token
+			jwtGroup.POST("user/login", v2.UserLogin)
 
 			// 使用中间件验证.
-			jwt := v2.Group("")
+			jwt := jwtGroup.Group("")
 			jwt.Use(middleware.JwtRequired())
 			{
-				jwt.GET("ping", api.HelloJwt)
+				jwt.GET("user/me", v2.UserMe)
+				jwt.PUT("user/changepassword", v2.ChangePassword)
+				jwt.GET("ping", v2.HelloJwt)
 			}
 
 		}
