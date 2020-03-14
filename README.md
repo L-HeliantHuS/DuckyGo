@@ -1,4 +1,4 @@
-# DuckyGo (基于gin+gorm搭建的快速高效稳定的web restful api)
+# DuckyGo (基于gin+gorm搭建的快速高效稳定同时支持Session和Jwt的web restful api)
 
 <div align=center>
 <img width="518" src="https://github.com/L-HeliantHuS/DuckyGo/raw/master/static/DuckyGo.png">
@@ -36,10 +36,12 @@
 4. [Go-Redis](https://github.com/go-redis/redis): Golang Redis客户端.
 5. [godotenv](https://github.com/joho/godotenv): 开发环境下的环境变量工具，方便使用环境变量.
 6. [Gin-Cors](https://github.com/gin-contrib/cors): Gin框架提供的跨域中间件.
-7. 实现了国际化i18n的一些基本功能. (详细在API层调用, conf/下有配置文件)
-8. 本项目自动选择内存或者是Redis来保存用户Session登陆状态.
-9. 使用Redis-list实现了内部消息队列,发送邮件可实现完全异步发送.
-10. 同时实现了session和jwt验证， 让用户可以自己选择而不用自己造轮子.
+7. [Jwt-Go](https://github.com/dgrijalva/jwt-go): Golang JWT认证组件
+8. [AMPQ](https://github.com/streadway/amqp): Golang RabbitMQ客户端
+9. 实现了国际化i18n的一些基本功能. (详细在API层调用, conf/下有配置文件)
+10. 本项目自动选择内存或者是Redis来保存用户Session登陆状态.
+11. 使用Redis-list实现了内部消息队列,发送邮件可实现完全异步发送.
+12. 同时实现了session和jwt验证， 让用户可以自己选择而不用自己造轮子.
 
 本项目已经预先实现了一些常用的代码方便参考和复用:
 
@@ -48,9 +50,11 @@
 3. 实现了```/api/v1/user/login```用户登录接口
 4. 实现了```/api/v1/user/me```用户资料接口(需要登录后获取session)
 5. 实现了```/api/v1/user/logout```用户登出接口(需要登录后获取session)
-6. 实现了```/api/v1/user/changepassword```用户修改密码接口
-7. 实现了```/api/v2/sign```获得jwtToken
-8. 实现了```/api/v2/ping```测试jwtToken可用性
+6. 实现了```/api/v1/user/changepassword```用户修改密码接口(需要登录后获取session)
+7. 实现了```/api/v2/user/register```用户注册接口(和v1基本一样)
+7. 实现了```/api/v2/user/login```用户登录接口(获得jwtToken, 无状态)
+8. 实现了```/api/v2/user/me```用户个人信息接口(传递token验证身份, 无状态)
+8. 实现了```/api/v2/user/changepassword```用户修改密码接口(传递token验证身份, 无状态)
 
 本项目已经预先创建了一系列文件夹划分出下列模块:
 
@@ -95,10 +99,13 @@ RABBITMQ_DSN="amqp://mq_user:mq_passwd@localhost:5672/virtual_host"             
 REDIS_ADDR="127.0.0.1:6379" # Redis端口和地址
 REDIS_PW=""                 # Redis连接密码
 REDIS_DB=""                 # Redis库从0到10，不填即为0
-SESSION_SECRE=""            # Seesion密钥，必须设置而且不要泄露
+SESSION_SECRE=""            # Seesion密钥     (切记不能泄露！！)
+JWT_SECRET_KEY=""           # JWT密钥配置      (切记不能泄露！！)
 GIN_MODE="debug"            # 设置gin的运行模式，有 debug 和 release
 LOG_LEVEL="ERROR"           # 设置为ERROR基本不会记录log 设置为DEBUG则会详细记录每次请求
 RIM="notuse"                # 设置为use的时候会启动mysql之类的连接，非设置为notuse就会关闭mysql连接
+V1="on"                     # 是否启动v1 (Session-Cookie身份验证)
+V2="off"                    # 是否启动v2 (JWT-Token身份验证)
 ```
 
 Windows安装MySQL和Redis麻烦?:no_mouth: 你可以使用[Docker](https://hub.docker.com/)啊！:sunglasses:

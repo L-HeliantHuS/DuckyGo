@@ -12,13 +12,16 @@ RUN CGO_ENABLED=0 GOOS=linux GO111MODULE=on GOARCH=amd64 go build -o duckygo
 FROM alpine
 
 # 配置环境变量 这里注意ip地址不可以填写127.0.0.1了~ 因为是在当前的容器里面 当前容器并没有 mysql 和 redis...
-ENV MYSQL_DSN="db_user:db_passwd@tcp(172.168.70.171:8052)/db_name?charset=utf8&parseTime=True&loc=Local"
+ENV MYSQL_DSN="db_user:db_passwd@tcp(mysql_addr:3306)/db_name?charset=utf8&parseTime=True&loc=Local"
 ENV REDIS_ADDR="172.168.70.171:8051"
 ENV REDIS_PW=""
 ENV REDIS_DB="0"
 ENV SESSION_SECRE="4T8I9T48I094T389013h98r0PIK6Y5LUH5IJOWE"
+ENV JWT_SECRET_KEY="QH9TH244T2H9TH9HJWAOIETWIOT28T8H209T2EW"
 ENV GIN_MODE="release"
 ENV PORT=8000
+ENV V1="on"
+ENV V2="off"
 
 # 创建翻译文件和日志文件目录  不要问为什么没有log日志文件夹 生产从不需要日志！！ (滑稽
 RUN mkdir -p /www/conf/locales
