@@ -54,7 +54,9 @@
 7. 实现了```/api/v2/user/register```用户注册接口(和v1基本一样)
 7. 实现了```/api/v2/user/login```用户登录接口(获得jwtToken, 无状态)
 8. 实现了```/api/v2/user/me```用户个人信息接口(传递token验证身份, 无状态)
-8. 实现了```/api/v2/user/changepassword```用户修改密码接口(传递token验证身份, 无状态)
+9. 实现了```/api/v2/user/changepassword```用户修改密码接口(传递token验证身份, 无状态)
+9. 实现了```/api/v2/user/logout```用户注销接口(传递token, 并且将token存入黑名单, 无状态)
+
 
 本项目已经预先创建了一系列文件夹划分出下列模块:
 
