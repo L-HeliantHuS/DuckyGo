@@ -6,6 +6,7 @@ import (
 	"DuckyGo/model"
 	"DuckyGo/serializer"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 	"time"
 )
 
@@ -15,10 +16,10 @@ type UserLoginService struct {
 	Password string `form:"password" json:"password" binding:"required,min=8,max=18"`
 }
 
-func GenerateToken(user model.User) (string, error) {
+func GenerateToken(user model.User, ExpiresTime int64) (string, error) {
 	claims := auth.Jwt{
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * time.Duration(720)).Unix(),
+			ExpiresAt: ExpiresTime,
 			IssuedAt:  time.Now().Unix(),
 		},
 		user,
@@ -32,6 +33,7 @@ func GenerateToken(user model.User) (string, error) {
 // Login 用户登录函数
 func (service *UserLoginService) Login() *serializer.Response {
 	var user model.User
+	ExpriesTime := time.Now().Add(time.Hour * time.Duration(720)).Unix()
 
 	if err := model.DB.Where("user_name = ?", service.UserName).First(&user).Error; err != nil {
 		return &serializer.Response{
@@ -47,7 +49,7 @@ func (service *UserLoginService) Login() *serializer.Response {
 		}
 	}
 
-	token, err := GenerateToken(user)
+	token, err := GenerateToken(user, ExpriesTime)
 	if err != nil {
 		return &serializer.Response{
 			Code:  serializer.ServerPanicError,
@@ -56,6 +58,10 @@ func (service *UserLoginService) Login() *serializer.Response {
 	}
 
 	return &serializer.Response{
-		Data: token,
+		Data: gin.H{
+			"access_token": token,
+			"expires_in":   ExpriesTime,
+			"token_type":   "Baerer",
+		},
 	}
 }
