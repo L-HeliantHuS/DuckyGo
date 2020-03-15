@@ -36,9 +36,10 @@ func JwtRequired() gin.HandlerFunc {
 			return
 		}
 
+
 		// 解码token值
-		token, _ := jwt.ParseWithClaims(split[1], &auth.Jwt{}, func(token *jwt.Token) (interface{}, error) { return conf.SigningKey, nil })
-		if token.Valid != true {
+		token, err := jwt.ParseWithClaims(split[1], &auth.Jwt{}, func(token *jwt.Token) (interface{}, error) { return conf.SigningKey, nil })
+		if err != nil || token.Valid != true {
 			// 过期或者非正确处理
 			c.JSON(http.StatusOK, serializer.Response{
 				Code: serializer.UserNotPermissionError,
