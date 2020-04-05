@@ -3,7 +3,6 @@ package middleware
 import (
 	"DuckyGo/model"
 	"DuckyGo/serializer"
-	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -45,7 +44,6 @@ func AuthRequired() gin.HandlerFunc {
 // 必须为管理员
 func AuthAdmin() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		fmt.Println("1")
 		if user, _ := c.Get("user"); user != nil {
 			if user.(*model.User).SuperUser {
 				c.Next()

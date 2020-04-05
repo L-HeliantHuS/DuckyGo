@@ -31,7 +31,7 @@ func NewRouter() *gin.Engine {
 	r.GET("/", api.Index)
 	r.GET("ping", api.Ping)
 
-	// v1 最基本网站需要
+	// V1 最基本网站需要
 	if os.Getenv("V1") == "on" {
 		sessionGroup := r.Group("/api/v1")
 		{
@@ -65,7 +65,7 @@ func NewRouter() *gin.Engine {
 		}
 	}
 
-	// v2 特殊情况需要 列如: 微信小程序等无法使用session维持会话的场景
+	// V2 特殊情况需要 列如: 微信小程序等无法使用session维持会话的场景
 	if os.Getenv("V2") == "on" {
 
 		// 因为v2必须依赖用户模型和Redis, 所以判断是否开启了Redis和MySQL

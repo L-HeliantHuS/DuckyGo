@@ -61,7 +61,7 @@ func (service *UserLoginService) Login() *serializer.Response {
 		Data: gin.H{
 			"access_token": token,
 			"expires_in":   ExpriesTime,
-			"token_type":   "Baerer",
+			"token_type":   "Bearer",
 		},
 	}
 }
