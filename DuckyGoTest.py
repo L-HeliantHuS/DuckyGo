@@ -120,7 +120,7 @@ class V2Test:
         response = requests.post(f"{V2URL}/user/login", data=data).json()
         if response.get("code") == 0:
             if response["data"] != "":
-                self.headers["Authorization"] = "Bearer" + " " + response["data"]
+                self.headers["Authorization"] = "Bearer" + " " + response["data"]["access_token"]
                 print(f"[+]登录接口没问题~")
             else:
                 print(f"[-]Login: 接口没问题, 但是没有获得Token")
@@ -178,12 +178,12 @@ if __name__ == "__main__":
             exit()
 
         try:
-            v2 = V2Test()
-            v2.Register()
-            v2.Login()
-            v2.Me()
-            v2.ChangePassword()
-            v2.Logout()
+	        v2 = V2Test()
+	        v2.Register()
+	        v2.Login()
+	        v2.Me()
+	        v2.ChangePassword()
+	        v2.Logout()
         except:
             print("[x] DuckyGo可能未开启v2的api组")
     else:
