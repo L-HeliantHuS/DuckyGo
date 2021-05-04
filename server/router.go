@@ -92,6 +92,13 @@ func NewRouter() *gin.Engine {
 				jwt.PUT("user/changepassword", v2.ChangePassword)
 				// 注销
 				jwt.DELETE("user/logout", v2.Logout)
+
+
+				admin := jwt.Group("")
+				admin.Use(middleware.AuthAdmin())
+				{
+					
+				}
 			}
 
 		}
