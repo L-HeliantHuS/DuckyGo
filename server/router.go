@@ -13,7 +13,16 @@ import (
 
 // NewRouter 路由配置
 func NewRouter() *gin.Engine {
-	r := gin.Default()
+
+	r := &gin.Engine{}
+
+	// 如果以debug模式启动 控制台就会打印log, release模式下就不打印log以提升性能, 大概可以提升10倍性能.
+	if os.Getenv("GIN_MODE") != "DEBUG" {
+		r = gin.New()
+		r.Use(gin.Recovery())
+	} else {
+		r = gin.Default()
+	}
 
 	r.StaticFile("/favicon.ico", "static/favicon.ico")
 
@@ -73,7 +82,6 @@ func NewRouter() *gin.Engine {
 			panic(fmt.Sprintf("v2 JWT验证必须依赖于MySQL以及Redis, 请在环境变量设置RIM为'use', 并且配置MySQL和Redis的连接"))
 		}
 
-
 		jwtGroup := r.Group("/api/v2")
 		{
 			// 注册
@@ -93,11 +101,10 @@ func NewRouter() *gin.Engine {
 				// 注销
 				jwt.DELETE("user/logout", v2.Logout)
 
-
 				admin := jwt.Group("")
 				admin.Use(middleware.AuthAdmin())
 				{
-					
+
 				}
 			}
 
